@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "myawos-lite"
+version = "0.1.0"
+description = "Small-airfield weather radio: Airspy click detection and relay-keyed voice playback"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "MyAWOS Project"}]
+dependencies = ["numpy>=1.24", "pyserial>=3.5"]
+
+[project.scripts]
+myawos-lite = "myawos_lite.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,21 @@
+[Unit]
+Description=MyAWOS Lite Airspy click detector and weather radio
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=myawos
+Group=myawos
+SupplementaryGroups=audio dialout plugdev
+ExecStart=/usr/bin/myawos-lite run
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/myawos-lite
+
+[Install]
+WantedBy=multi-user.target

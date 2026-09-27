@@ -1,0 +1,53 @@
+[station]
+identifier = "54T"
+
+[radio]
+frequency_mhz = 122.700
+required_clicks = 5
+click_window_seconds = 4.0
+cooldown_seconds = 30
+
+[receiver]
+type = "airspy"
+serial = "auto"
+sample_rate = 2500000
+chunk_bytes = 8192
+calibration_samples = 700
+threshold_on_ratio = 4.0
+threshold_off_ratio = 2.5
+min_click_gap_seconds = 0.20
+min_quiet_time_seconds = 0.12
+restart_delay_seconds = 0.5
+
+[relay]
+port = "auto"
+baud = 9600
+on_command_hex = "A0 01 01 A2"
+off_command_hex = "A0 01 00 A1"
+
+[transmitter]
+# The package never enables RF transmission automatically.
+enabled = false
+audio_device = "plughw:CARD=Device,DEV=0"
+ptt_lead_seconds = 0.5
+ptt_tail_seconds = 0.3
+max_seconds = 60
+
+[weather]
+type = "weatherlink_live"
+host = "192.0.2.10"
+port = 80
+timeout_seconds = 5
+refresh_seconds = 60
+
+# Used only for type = "ecowitt_cloud". Protect this file as root:myawos 0640.
+application_key = ""
+api_key = ""
+mac = ""
+
+# Used only for type = "sample".
+sample_file = "/usr/share/doc/myawos-lite/examples/sample-weather.json"
+
+[paths]
+state_directory = "/var/lib/myawos-lite"
+media_directory = "/usr/share/myawos-lite/media"

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MyAWOS Lite</title>
+  <style>
+    :root{--navy:#102a43;--blue:#1273de;--green:#27864b;--gold:#f0b429;--ink:#243b53;--pale:#f3f7fb}
+    *{box-sizing:border-box}body{margin:0;color:var(--ink);font:17px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;background:white}
+    header{padding:80px 24px;background:linear-gradient(135deg,#0b2238,#174f7d);color:white;text-align:center}
+    header h1{font-size:clamp(42px,7vw,78px);margin:0 0 12px}header p{font-size:22px;max-width:780px;margin:0 auto 30px}
+    .button{display:inline-block;margin:6px;padding:12px 21px;border-radius:8px;background:var(--gold);color:#14212b;text-decoration:none;font-weight:750}.button.secondary{background:white}
+    main{max-width:1080px;margin:auto;padding:45px 24px}section{padding:28px 0}h2{color:var(--navy);font-size:34px;margin-bottom:12px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}.card{background:var(--pale);padding:22px;border-radius:14px;border:1px solid #d8e5ef}.card h3{color:var(--navy);margin-top:0}
+    .diagram{width:100%;border:1px solid #d8e5ef;border-radius:14px;background:white}pre{background:#102a43;color:#ecf4fa;padding:18px;border-radius:10px;overflow:auto}.notice{border-left:7px solid var(--gold);background:#fff8df;padding:20px;border-radius:8px}footer{padding:35px 24px;text-align:center;background:var(--navy);color:white}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MyAWOS Lite</h1>
+    <p>Airspy click detection, local weather, and relay-keyed aviation-radio playback in one small Ubuntu package.</p>
+    <a class="button" href="#install">Install</a><a class="button secondary" href="#hardware">Hardware</a>
+  </header>
+  <main>
+    <section><h2>A smaller MyAWOS</h2><div class="grid">
+      <div class="card"><h3>Listen</h3><p>An Airspy receiver detects five microphone clicks on the configured frequency.</p></div>
+      <div class="card"><h3>Observe</h3><p>Current WeatherLink Live or Ecowitt measurements are converted into a spoken report.</p></div>
+      <div class="card"><h3>Transmit</h3><p>A dry-contact USB relay keys a separate Yaesu radio while isolated audio is played.</p></div>
+      <div class="card"><h3>Recover</h3><p>PTT releases, the Airspy restarts, and noise calibration runs again automatically.</p></div>
+    </div></section>
+    <section id="hardware"><h2>Connections</h2><img class="diagram" src="../docs/wiring.svg" alt="MyAWOS Lite connection diagram"></section>
+    <section id="install"><h2>Simple Ubuntu installation</h2><pre>sudo apt install ./myawos-lite_0.1.0_all.deb
+sudo myawos-lite setup
+sudo myawos-lite doctor</pre><p>Every installation starts with automatic transmission disabled. Audio and relay-OFF checks can be completed without keying the radio.</p></section>
+    <section><h2>Purposefully limited</h2><p>Lite focuses on the dependable core: Airspy RX, five-click detection, weather retrieval, recorded voice, USB-relay PTT, and audio playback. It excludes camera, email, cloud modeling, SDR transmission, GPIO and display features.</p></section>
+    <section class="notice"><strong>Operator responsibility:</strong> Installation does not grant authority to transmit. Verify licensing, frequency assignment, antenna safety, receiver protection, audio quality and fail-safe PTT release before operational use.</section>
+  </main>
+  <footer>MyAWOS Lite · An open MyAWOS subset</footer>
+</body>
+</html>

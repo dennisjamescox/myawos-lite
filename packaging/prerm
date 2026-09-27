@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+systemctl stop myawos-lite.service 2>/dev/null || true
+systemctl disable myawos-lite.service 2>/dev/null || true

@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+if ! getent group myawos >/dev/null; then
+    addgroup --system myawos
+fi
+if ! id myawos >/dev/null 2>&1; then
+    adduser --system --ingroup myawos --home /var/lib/myawos-lite --no-create-home myawos
+fi
+for group in audio dialout plugdev; do
+    if getent group "$group" >/dev/null; then
+        adduser myawos "$group" >/dev/null
+    fi
+done
+install -d -o myawos -g myawos -m 0750 /var/lib/myawos-lite
+chown root:myawos /etc/myawos-lite/config.toml
+chmod 0640 /etc/myawos-lite/config.toml
+systemctl daemon-reload
+udevadm control --reload-rules || true
+
+echo "MyAWOS Lite installed with transmission disabled."
+echo "Run: sudo myawos-lite setup"
+echo "Then: sudo myawos-lite doctor"

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">MyAWOS Lite wiring</title>
+  <desc id="desc">Airspy receives clicks while USB audio and a dry-contact relay connect the computer to a Yaesu radio through an SCU-42.</desc>
+  <defs>
+    <style>
+      .box{fill:#f7fafc;stroke:#17324d;stroke-width:3;rx:18}.head{font:700 27px sans-serif;fill:#102a43}.text{font:20px sans-serif;fill:#243b53}.small{font:17px sans-serif;fill:#486581}.line{fill:none;stroke:#1273de;stroke-width:5}.ptt{fill:none;stroke:#d64545;stroke-width:5}.rf{fill:none;stroke:#27864b;stroke-width:5}.warn{fill:#fff5d6;stroke:#d69e2e;stroke-width:3;rx:14}
+    </style>
+    <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#1273de"/></marker>
+    <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#d64545"/></marker>
+    <marker id="arrow-green" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#27864b"/></marker>
+  </defs>
+  <rect width="1200" height="700" fill="white"/>
+  <text x="600" y="52" text-anchor="middle" class="head">MyAWOS Lite connection diagram</text>
+
+  <rect class="box" x="50" y="120" width="220" height="120"/><text class="head" x="160" y="165" text-anchor="middle">RX antenna</text><text class="small" x="160" y="205" text-anchor="middle">118–137 MHz</text>
+  <rect class="box" x="350" y="120" width="220" height="120"/><text class="head" x="460" y="165" text-anchor="middle">Airspy RX</text><text class="small" x="460" y="205" text-anchor="middle">Receive only</text>
+  <rect class="box" x="680" y="95" width="260" height="170"/><text class="head" x="810" y="145" text-anchor="middle">Ubuntu computer</text><text class="text" x="810" y="185" text-anchor="middle">MyAWOS Lite</text><text class="small" x="810" y="220" text-anchor="middle">Weather + click detection</text>
+
+  <path class="rf" marker-end="url(#arrow-green)" d="M270 180 H350"/><path class="line" marker-end="url(#arrow-blue)" d="M570 180 H680"/><text class="small" x="620" y="165" text-anchor="middle">USB</text>
+
+  <rect class="box" x="390" y="360" width="220" height="130"/><text class="head" x="500" y="402" text-anchor="middle">USB audio</text><text class="small" x="500" y="438" text-anchor="middle">Headphone output</text>
+  <rect class="box" x="390" y="545" width="220" height="105"/><text class="head" x="500" y="585" text-anchor="middle">USB relay</text><text class="small" x="500" y="620" text-anchor="middle">COM + NO only</text>
+  <rect class="box" x="700" y="360" width="220" height="130"/><text class="head" x="810" y="400" text-anchor="middle">Audio interface</text><text class="small" x="810" y="433" text-anchor="middle">Isolation</text><text class="small" x="810" y="460" text-anchor="middle">DC block + attenuation</text>
+  <rect class="box" x="990" y="330" width="175" height="240"/><text class="head" x="1077" y="375" text-anchor="middle">SCU-42</text><text class="small" x="1077" y="420" text-anchor="middle">PJ-068 mic</text><text class="small" x="1077" y="465" text-anchor="middle">3.5 mm PTT</text><text class="small" x="1077" y="520" text-anchor="middle">Yaesu radio</text>
+
+  <path class="line" marker-end="url(#arrow-blue)" d="M760 265 V330 H500 V360"/><text class="small" x="600" y="320">USB</text>
+  <path class="ptt" marker-end="url(#arrow-red)" d="M860 265 V600 H610"/><text class="small" x="735" y="585">USB</text>
+  <path class="line" marker-end="url(#arrow-blue)" d="M610 425 H700"/>
+  <path class="line" marker-end="url(#arrow-blue)" d="M920 425 H990"/><text class="small" x="955" y="410" text-anchor="middle">PJ-068</text>
+  <path class="ptt" marker-end="url(#arrow-red)" d="M610 600 H955 V470 H990"/><text class="small" x="780" y="625" text-anchor="middle">COM→ground · NO→PTT</text>
+
+  <rect class="warn" x="50" y="375" width="270" height="165"/><text class="head" x="185" y="420" text-anchor="middle">Important</text><text class="small" x="185" y="458" text-anchor="middle">Separate/protect the</text><text class="small" x="185" y="486" text-anchor="middle">Airspy antenna during TX.</text><text class="small" x="185" y="520" text-anchor="middle">Never feed 5 V to PTT.</text>
+</svg>
