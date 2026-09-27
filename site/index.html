@@ -5,35 +5,94 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MyAWOS Lite</title>
   <style>
-    :root{--navy:#102a43;--blue:#1273de;--green:#27864b;--gold:#f0b429;--ink:#243b53;--pale:#f3f7fb}
-    *{box-sizing:border-box}body{margin:0;color:var(--ink);font:17px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;background:white}
-    header{padding:80px 24px;background:linear-gradient(135deg,#0b2238,#174f7d);color:white;text-align:center}
-    header h1{font-size:clamp(42px,7vw,78px);margin:0 0 12px}header p{font-size:22px;max-width:780px;margin:0 auto 30px}
-    .button{display:inline-block;margin:6px;padding:12px 21px;border-radius:8px;background:var(--gold);color:#14212b;text-decoration:none;font-weight:750}.button.secondary{background:white}
-    main{max-width:1080px;margin:auto;padding:45px 24px}section{padding:28px 0}h2{color:var(--navy);font-size:34px;margin-bottom:12px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}.card{background:var(--pale);padding:22px;border-radius:14px;border:1px solid #d8e5ef}.card h3{color:var(--navy);margin-top:0}
-    .diagram{width:100%;border:1px solid #d8e5ef;border-radius:14px;background:white}pre{background:#102a43;color:#ecf4fa;padding:18px;border-radius:10px;overflow:auto}.notice{border-left:7px solid var(--gold);background:#fff8df;padding:20px;border-radius:8px}footer{padding:35px 24px;text-align:center;background:var(--navy);color:white}
+    :root{--navy:#102a43;--blue:#126ec8;--green:#267a46;--gold:#f0b429;--ink:#243b53;--muted:#526d82;--pale:#f3f7fb}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font:17px/1.58 system-ui,-apple-system,Segoe UI,sans-serif;background:#fff}
+    header{padding:76px 24px;background:linear-gradient(135deg,#0b2238,#174f7d);color:#fff;text-align:center}
+    header h1{font-size:clamp(44px,7vw,76px);margin:0 0 12px}header .lead{font-size:23px;max-width:910px;margin:0 auto 18px}header .sub{max-width:760px;margin:0 auto 28px;color:#dbeaf5}
+    .button{display:inline-block;margin:6px;padding:13px 21px;border-radius:8px;background:var(--gold);color:#14212b;text-decoration:none;font-weight:750}.button.secondary{background:#fff}.button.blue{background:var(--blue);color:#fff}
+    main{max-width:1120px;margin:auto;padding:34px 24px}section{padding:30px 0}h2{color:var(--navy);font-size:34px;margin:0 0 15px}h3{color:var(--navy)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}.card{background:var(--pale);padding:22px;border-radius:14px;border:1px solid #d8e5ef}.card h3{margin-top:0}.number{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;margin-right:7px}
+    .diagram{width:100%;border:1px solid #d8e5ef;border-radius:14px;background:#fff}.steps{counter-reset:step}.step{position:relative;margin:18px 0;padding:18px 22px 18px 68px;border:1px solid #d8e5ef;border-radius:12px}.step:before{counter-increment:step;content:counter(step);position:absolute;left:20px;top:19px;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800}
+    table{width:100%;border-collapse:collapse;font-size:15px}th,td{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #cfdae3}th{background:var(--navy);color:#fff}a{color:#075fae}pre{background:#102a43;color:#ecf4fa;padding:18px;border-radius:10px;overflow:auto}.notice{border-left:7px solid var(--gold);background:#fff8df;padding:20px;border-radius:8px}.answer{border:2px solid #b8d9c2;background:#effaf2;padding:22px;border-radius:12px}.small{font-size:14px;color:var(--muted)}footer{padding:35px 24px;text-align:center;background:var(--navy);color:#fff}
+    @media(max-width:700px){table,thead,tbody,tr,th,td{display:block}thead{display:none}td{padding:8px 12px}tr{display:block;margin:14px 0;border:1px solid #cfdae3;border-radius:10px;overflow:hidden}td:first-child{font-weight:800;background:var(--pale)}}
   </style>
 </head>
 <body>
   <header>
     <h1>MyAWOS Lite</h1>
-    <p>Airspy click detection, local weather, and relay-keyed aviation-radio playback in one small Ubuntu package.</p>
-    <a class="button" href="#install">Install</a><a class="button secondary" href="#hardware">Hardware</a>
+    <p class="lead">MyAWOS has expanded to FAA weather cameras, runway-light operations, AWC weather integration and much more. That can be overwhelming to a new user—so I created MyAWOS Lite.</p>
+    <p class="sub">Five microphone clicks in. Current local weather out. One Ubuntu installer, a guided setup wizard, and no source-code editing.</p>
+    <a class="button" href="https://github.com/dennisjamescox/myawos-lite/releases/latest/download/myawos-lite_0.1.0_all.deb">Download MyAWOS Lite</a>
+    <a class="button secondary" href="#buy">What to buy</a>
+    <p class="small" style="color:#dbeaf5">Free public download · No GitHub account required</p>
   </header>
   <main>
-    <section><h2>A smaller MyAWOS</h2><div class="grid">
-      <div class="card"><h3>Listen</h3><p>An Airspy receiver detects five microphone clicks on the configured frequency.</p></div>
-      <div class="card"><h3>Observe</h3><p>Current WeatherLink Live or Ecowitt measurements are converted into a spoken report.</p></div>
-      <div class="card"><h3>Transmit</h3><p>A dry-contact USB relay keys a separate Yaesu radio while isolated audio is played.</p></div>
-      <div class="card"><h3>Recover</h3><p>PTT releases, the Airspy restarts, and noise calibration runs again automatically.</p></div>
-    </div></section>
-    <section id="hardware"><h2>Connections</h2><img class="diagram" src="../docs/wiring.svg" alt="MyAWOS Lite connection diagram"></section>
-    <section id="install"><h2>Simple Ubuntu installation</h2><pre>sudo apt install ./myawos-lite_0.1.0_all.deb
-sudo myawos-lite setup
-sudo myawos-lite doctor</pre><p>Every installation starts with automatic transmission disabled. Audio and relay-OFF checks can be completed without keying the radio.</p></section>
-    <section><h2>Purposefully limited</h2><p>Lite focuses on the dependable core: Airspy RX, five-click detection, weather retrieval, recorded voice, USB-relay PTT, and audio playback. It excludes camera, email, cloud modeling, SDR transmission, GPIO and display features.</p></section>
-    <section class="notice"><strong>Operator responsibility:</strong> Installation does not grant authority to transmit. Verify licensing, frequency assignment, antenna safety, receiver protection, audio quality and fail-safe PTT release before operational use.</section>
+    <section>
+      <h2>How it works</h2>
+      <div class="grid">
+        <div class="card"><h3><span class="number">1</span>Five clicks</h3><p>An Airspy receiver listens on the airport frequency and detects a valid five-click request.</p></div>
+        <div class="card"><h3><span class="number">2</span>Fresh weather</h3><p>The computer reads WeatherLink Live or Ecowitt and builds a report from included voice clips.</p></div>
+        <div class="card"><h3><span class="number">3</span>Radio playback</h3><p>A USB relay keys a separate Yaesu radio while isolated, attenuated audio is played.</p></div>
+        <div class="card"><h3><span class="number">4</span>Ready again</h3><p>PTT releases, Airspy restarts, and click detection recalibrates automatically.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Lite on purpose</h2>
+      <p>MyAWOS Lite provides click detection, current local weather, recorded voice, USB-relay PTT and audio playback. The full MyAWOS project remains the place for cameras, AWC products, forecasts, email reports, runway-light control, displays and other advanced integrations.</p>
+    </section>
+
+    <section id="buy">
+      <h2>What you need</h2>
+      <p>Use equipment you already own where possible. Product listings change, so match the model and specification—not merely the appearance.</p>
+      <table>
+        <thead><tr><th>Component</th><th>Recommended source</th><th>What matters</th></tr></thead>
+        <tbody>
+          <tr><td>Ubuntu computer</td><td><a href="https://www.amazon.com/s?k=mini+pc+ubuntu+compatible">Amazon mini-PC search</a></td><td>x86-64, Ubuntu 24.04, four USB ports or a powered hub.</td></tr>
+          <tr><td>Airspy receiver</td><td><a href="https://airspy.com/purchase/">Official Airspy distributors</a></td><td>Airspy Mini or R2; receive-only click detection.</td></tr>
+          <tr><td>USB PTT relay</td><td><a href="https://www.amazon.com/dp/B01CN7E0RQ">LCUS-1 example</a> · <a href="https://www.amazon.com/s?k=LCUS-1+CH340+USB+relay+5V">Amazon search</a></td><td>5 V, CH340, one channel, dry COM/NO/NC contacts.</td></tr>
+          <tr><td>USB sound adapter</td><td><a href="https://www.amazon.com/dp/B00IRVQ0F8">Sabrent AU-MMSA</a></td><td>Separate class-compliant audio output.</td></tr>
+          <tr><td>Aviation radio</td><td><a href="https://www.aircraftspruce.com/catalog/avpages/yaesufta250l.php">Yaesu FTA-250L</a></td><td>A compatible FTA-250L, FTA-450L or FTA-550 may be reused.</td></tr>
+          <tr><td>Yaesu adapter</td><td><a href="https://www.aircraftspruce.com/catalog/avpages/yaesu_11-18500.php">SCU-42 at Aircraft Spruce</a></td><td>Check whether one was included with the radio.</td></tr>
+          <tr><td>Audio interface</td><td><a href="https://gibson-barnes.com/products/pj-068-cord-plug-for-the-microphone">PJ-068 plug</a> + documented interface</td><td>Must be isolated, DC-blocked and attenuated; not a plain cable.</td></tr>
+          <tr><td>Airband antennas</td><td><a href="https://www.amazon.com/s?k=VHF+airband+118-136+SMA+antenna">Receive</a> · <a href="https://www.aircraftspruce.com/catalog/avpages/antenna11-13828.php">Transmit</a></td><td>Separate receive/transmit systems covering 118–137 MHz.</td></tr>
+          <tr><td>Weather station</td><td><a href="https://davisnet.com/products/weatherlink-live">WeatherLink Live</a> · <a href="https://shop.ecowitt.com/products/gw1100">Ecowitt GW1100</a></td><td>Use compatible outdoor wind and temperature sensors.</td></tr>
+        </tbody>
+      </table>
+      <div class="notice" style="margin-top:20px"><strong>Do not use a plain headphone cable for radio audio.</strong> The computer output must be reduced to microphone level and isolated from the radio. The hardware guide specifies stereo-to-mono summing, 20–30 dB initial attenuation, DC blocking and galvanic isolation.</div>
+    </section>
+
+    <section>
+      <h2>How everything connects</h2>
+      <img class="diagram" src="../docs/wiring.svg" alt="MyAWOS Lite connection diagram">
+      <p class="small">Airspy only listens. The USB relay is only a dry PTT switch. A separate Yaesu radio and isolated audio interface perform the transmission.</p>
+    </section>
+
+    <section id="install">
+      <h2>Install in five steps</h2>
+      <div class="steps">
+        <div class="step"><h3>Install Ubuntu first</h3><p>Install <a href="https://ubuntu.com/download/desktop">Ubuntu 24.04 LTS</a>, connect the Airspy, relay and USB audio adapter, and connect the computer to the internet.</p></div>
+        <div class="step"><h3>Download and install</h3><pre>cd ~/Downloads
+sudo apt install ./myawos-lite_0.1.0_all.deb</pre><p>Ubuntu installs MyAWOS Lite and downloads its Airspy, audio, Python and serial dependencies.</p></div>
+        <div class="step"><h3>Answer the setup wizard</h3><pre>sudo myawos-lite setup</pre><p>Enter the station ID, authorized frequency, audio device, and WeatherLink Live or Ecowitt information. No code editing is required.</p></div>
+        <div class="step"><h3>Run safe checks</h3><pre>sudo myawos-lite devices
+sudo myawos-lite doctor
+sudo myawos-lite generate
+sudo myawos-lite play-audio
+sudo myawos-lite relay-off</pre><p>Keep the radio off or PTT disconnected. Audio-only playback never keys the transmitter.</p></div>
+        <div class="step"><h3>Commission only after verification</h3><pre>sudo myawos-lite enable-transmit --confirm
+sudo systemctl enable --now myawos-lite</pre><p>First verify wiring, frequency authority, antennas, RF protection, audio quality and fail-safe PTT release.</p></div>
+      </div>
+    </section>
+
+    <section class="answer">
+      <h2>Does one download install everything?</h2>
+      <p><strong>It installs all MyAWOS Lite software, voice clips, hardware rules and the background service.</strong> Ubuntu also downloads the required software dependencies.</p>
+      <p>You must install Ubuntu first and then complete the guided setup and physical commissioning. Software cannot safely choose your airport frequency, wire the radio, obtain weather credentials, adjust transmitted audio or approve an antenna installation. RF transmission stays disabled until you explicitly enable it.</p>
+    </section>
+
+    <section class="notice"><strong>Operator responsibility:</strong> Installation does not grant authority to transmit. Verify licensing and frequency coordination, station identification, RF exposure, antenna and feed-line safety, receiver protection, audio quality, interference prevention and automatic PTT release before operational use.</section>
   </main>
-  <footer>MyAWOS Lite · An open MyAWOS subset</footer>
+  <footer>MyAWOS Lite · A focused, open subset of MyAWOS</footer>
 </body>
 </html>

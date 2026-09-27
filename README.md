@@ -1,10 +1,13 @@
 # MyAWOS Lite
 
-MyAWOS Lite turns a small Ubuntu computer, an Airspy receiver, a USB relay,
-and a conventional aviation radio into a request-driven weather broadcast
-station. Five microphone clicks are detected by the Airspy; the relay keys the
-radio and the computer plays a prerecorded-voice report built from the latest
-weather-station observation.
+MyAWOS has grown to include FAA weather cameras, runway-light operations, AWC
+weather integration and other advanced features. MyAWOS Lite keeps the first
+installation focused: five microphone clicks are detected by an Airspy, a USB
+relay keys a conventional aviation radio, and the computer plays a
+prerecorded-voice report built from the latest local weather observation.
+
+No source-code editing is required. Users install one Ubuntu package and answer
+a guided setup wizard.
 
 This repository is intentionally a small subset of MyAWOS. It does not include
 HackRF transmission, cloud modeling, forecasts, camera images, email reports,
@@ -23,6 +26,14 @@ GPIO, OLED displays, or SMS integrations.
 See [hardware.md](docs/hardware.md) before purchasing or connecting equipment.
 
 ## Install the package
+
+The public installer is intended to be published at:
+
+`https://github.com/dennisjamescox/myawos-lite/releases/latest/download/myawos-lite_0.1.0_all.deb`
+
+Visitors can download a public GitHub Release asset without a GitHub account.
+Ubuntu 24.04 must already be installed, and internet access is required while
+`apt` downloads the package dependencies.
 
 ```bash
 sudo apt install ./myawos-lite_0.1.0_all.deb

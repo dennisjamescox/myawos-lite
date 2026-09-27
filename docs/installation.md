@@ -1,6 +1,18 @@
 # Installation and commissioning
 
-## 1. Install
+## Before you install
+
+MyAWOS Lite is packaged as one Ubuntu `.deb` installer. You do not need Git,
+Python knowledge, or source-code editing. Before downloading it, install Ubuntu
+24.04, connect the Airspy, USB relay and USB audio adapter, and have the station
+identifier, authorized frequency and weather-source details available.
+
+The installer includes MyAWOS Lite, its voice clips, service and hardware
+rules. When installed with `apt`, Ubuntu also downloads the Airspy, audio,
+Python and serial dependencies. Internet access is therefore required during
+installation.
+
+## 1. Download and install
 
 Download the `.deb`, then run:
 
@@ -9,8 +21,16 @@ sudo apt install ./myawos-lite_0.1.0_all.deb
 sudo myawos-lite setup
 ```
 
-The setup wizard writes `/etc/myawos-lite/config.toml` as `root:myawos` with
-mode 640 and leaves automatic transmission disabled.
+If the file is in the normal Downloads folder:
+
+```bash
+cd ~/Downloads
+sudo apt install ./myawos-lite_0.1.0_all.deb
+```
+
+The setup wizard asks for the station identifier, frequency, audio output and
+weather source. It writes `/etc/myawos-lite/config.toml` as `root:myawos` with
+mode 640 and leaves automatic transmission disabled. No program file is edited.
 
 ## 2. Inspect devices
 
