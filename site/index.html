@@ -22,7 +22,7 @@
     <h1>MyAWOS Lite</h1>
     <p class="lead">MyAWOS has expanded to FAA weather cameras, runway-light operations, AWC weather integration and much more. That can be overwhelming to a new user—so I created MyAWOS Lite.</p>
     <p class="sub">Five microphone clicks in. Current local weather out. One Ubuntu installer, a guided setup wizard, and no source-code editing.</p>
-    <a class="button" href="https://github.com/dennisjamescox/myawos-lite/releases/latest/download/myawos-lite_0.1.0_all.deb">Download MyAWOS Lite</a>
+    <a class="button" href="https://github.com/dennisjamescox/myawos-lite/releases/latest/download/myawos-lite_0.1.1_all.deb">Download MyAWOS Lite 0.1.1</a>
     <a class="button secondary" href="#buy">What to buy</a>
     <p class="small" style="color:#dbeaf5">Free public download · No GitHub account required</p>
   </header>
@@ -31,7 +31,7 @@
       <h2>How it works</h2>
       <div class="grid">
         <div class="card"><h3><span class="number">1</span>Five clicks</h3><p>An Airspy receiver listens on the airport frequency and detects a valid five-click request.</p></div>
-        <div class="card"><h3><span class="number">2</span>Fresh weather</h3><p>The computer reads WeatherLink Live or Ecowitt and builds a report from included voice clips.</p></div>
+        <div class="card"><h3><span class="number">2</span>Fresh weather</h3><p>The computer reads WeatherLink Live directly over the local network, or Ecowitt cloud, and builds a report from included voice clips.</p></div>
         <div class="card"><h3><span class="number">3</span>Radio playback</h3><p>A USB relay keys a separate Yaesu radio while isolated, attenuated audio is played.</p></div>
         <div class="card"><h3><span class="number">4</span>Ready again</h3><p>PTT releases, Airspy restarts, and click detection recalibrates automatically.</p></div>
       </div>
@@ -40,6 +40,16 @@
     <section>
       <h2>Lite on purpose</h2>
       <p>MyAWOS Lite provides click detection, current local weather, recorded voice, USB-relay PTT and audio playback. The full MyAWOS project remains the place for cameras, AWC products, forecasts, email reports, runway-light control, displays and other advanced integrations.</p>
+    </section>
+
+    <section>
+      <h2>Fresh-weather protection in version 0.1.1</h2>
+      <div class="grid">
+        <div class="card"><h3>Station time, not file time</h3><p>MyAWOS Lite uses the observation timestamp supplied by WeatherLink Live, so reprocessing an old response cannot make it appear current.</p></div>
+        <div class="card"><h3>12-hour safety limit</h3><p>Brief connection failures may use the last valid report. At 12 hours old, weather values are no longer transmitted.</p></div>
+        <div class="card"><h3>Clear unavailable report</h3><p>When weather is missing, invalid or too old, the radio says only: “No weather available at this time.”</p></div>
+        <div class="card"><h3>No extra Davis library</h3><p>WeatherLink Live is read through its local HTTP interface using Python’s standard library, reducing installation complexity.</p></div>
+      </div>
     </section>
 
     <section id="buy">
@@ -73,7 +83,7 @@
       <div class="steps">
         <div class="step"><h3>Install Ubuntu first</h3><p>Install <a href="https://ubuntu.com/download/desktop">Ubuntu 24.04 LTS</a>, connect the Airspy, relay and USB audio adapter, and connect the computer to the internet.</p></div>
         <div class="step"><h3>Download and install</h3><pre>cd ~/Downloads
-sudo apt install ./myawos-lite_0.1.0_all.deb</pre><p>Ubuntu installs MyAWOS Lite and downloads its Airspy, audio, Python and serial dependencies.</p></div>
+sudo apt install ./myawos-lite_0.1.1_all.deb</pre><p>Ubuntu installs MyAWOS Lite and downloads its Airspy, audio, Python and serial dependencies.</p></div>
         <div class="step"><h3>Answer the setup wizard</h3><pre>sudo myawos-lite setup</pre><p>Enter the station ID, authorized frequency, audio device, and WeatherLink Live or Ecowitt information. No code editing is required.</p></div>
         <div class="step"><h3>Run safe checks</h3><pre>sudo myawos-lite devices
 sudo myawos-lite doctor

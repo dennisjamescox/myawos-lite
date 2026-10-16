@@ -39,6 +39,8 @@ host = "192.0.2.10"
 port = 80
 timeout_seconds = 5
 refresh_seconds = 60
+# After this age, old observations are never transmitted.
+max_age_hours = 12
 
 # Used only for type = "ecowitt_cloud". Protect this file as root:myawos 0640.
 application_key = ""

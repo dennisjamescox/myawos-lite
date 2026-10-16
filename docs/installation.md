@@ -17,7 +17,7 @@ installation.
 Download the `.deb`, then run:
 
 ```bash
-sudo apt install ./myawos-lite_0.1.0_all.deb
+sudo apt install ./myawos-lite_0.1.1_all.deb
 sudo myawos-lite setup
 ```
 
@@ -25,7 +25,7 @@ If the file is in the normal Downloads folder:
 
 ```bash
 cd ~/Downloads
-sudo apt install ./myawos-lite_0.1.0_all.deb
+sudo apt install ./myawos-lite_0.1.1_all.deb
 ```
 
 The setup wizard asks for the station identifier, frequency, audio output and
@@ -48,6 +48,9 @@ For WeatherLink Live, set `weather.type = "weatherlink_live"` and enter its
 local IP address. For Ecowitt cloud, set `weather.type = "ecowitt_cloud"` and
 enter the application key, API key, and station MAC. Keep the configuration
 restricted to `root:myawos` because it may contain credentials.
+`weather.max_age_hours` defaults to 12; once an observation reaches that age,
+MyAWOS Lite announces that weather is unavailable instead of transmitting the
+old values.
 
 ```bash
 sudo myawos-lite doctor

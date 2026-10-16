@@ -22,7 +22,7 @@ short setup wizard.
 
 Buttons:
 
-- **Download MyAWOS Lite** → `https://github.com/dennisjamescox/myawos-lite/releases/latest/download/myawos-lite_0.1.0_all.deb`
+- **Download MyAWOS Lite 0.1.1** → `https://github.com/dennisjamescox/myawos-lite/releases/latest/download/myawos-lite_0.1.1_all.deb`
 - **See what to buy** → page anchor: What you need
 - **Installation instructions** → page anchor: Install MyAWOS Lite
 
@@ -40,9 +40,9 @@ traffic.
 
 ### 2. MyAWOS Lite gets the weather
 
-The computer reads wind, gust, temperature, dew point and pressure from a
-WeatherLink Live or Ecowitt weather station. It assembles a fresh report from
-the included prerecorded voice clips.
+The computer reads wind, gust, temperature, dew point and pressure directly
+from a WeatherLink Live unit on the local network, or from an Ecowitt weather
+station. It assembles a fresh report from the included prerecorded voice clips.
 
 ### 3. A separate radio transmits the report
 
@@ -69,6 +69,17 @@ back-to-back accidental transmissions.
 MyAWOS Lite intentionally leaves out cameras, email reports, AWC products,
 forecasts, runway-light control, displays, GPIO and SDR transmission. Those
 remain available in the full MyAWOS project.
+
+## Fresh-weather protection in version 0.1.1
+
+- MyAWOS Lite uses the observation timestamp supplied by WeatherLink Live—not
+  the time an old file or response happened to be processed.
+- Brief connection failures may use the last valid report.
+- At 12 hours old, the previous weather values are no longer transmitted.
+- Missing, invalid or old weather produces only: **“No weather available at
+  this time.”**
+- WeatherLink Live uses its local HTTP interface and Python's standard library,
+  so no separate Davis/WeatherLink Python package is required.
 
 ## What you need
 
@@ -140,7 +151,7 @@ Open Terminal and run:
 
 ```text
 cd ~/Downloads
-sudo apt install ./myawos-lite_0.1.0_all.deb
+sudo apt install ./myawos-lite_0.1.1_all.deb
 ```
 
 This installs MyAWOS Lite, the Airspy utilities, Python runtime libraries,
@@ -201,13 +212,15 @@ the operator explicitly enables it.
 - A new installation cannot transmit automatically.
 - The relay OFF command is sent at service startup and shutdown.
 - Audio and weather files are replaced atomically.
-- A failed weather update retains the last valid announcement.
+- A brief failed weather update may retain the last valid announcement.
+- Weather at or beyond the configurable 12-hour age limit is never reported;
+  the station says only that weather is unavailable.
 - Maximum transmit time and request cooldown are configurable.
 - The Airspy restarts and recalibrates after each transmission.
 
 ## Download, documentation and help
 
-- **Download installer** → `https://github.com/dennisjamescox/myawos-lite/releases/latest/download/myawos-lite_0.1.0_all.deb`
+- **Download installer** → `https://github.com/dennisjamescox/myawos-lite/releases/latest/download/myawos-lite_0.1.1_all.deb`
 - **View the latest release** → `https://github.com/dennisjamescox/myawos-lite/releases/latest`
 - **Documentation** → `https://github.com/dennisjamescox/myawos-lite/tree/main/docs`
 - **Report a problem** → `https://github.com/dennisjamescox/myawos-lite/issues`

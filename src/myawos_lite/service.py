@@ -17,6 +17,38 @@ from .weather import fetch
 
 
 LOGGER = logging.getLogger("myawos-lite")
+UNAVAILABLE_AUDIO_NAME = "WeatherStation_no_weather_available_at_this_time.wav"
+
+
+def weather_audio_for_transmission(
+    config: dict[str, Any], now: datetime | None = None
+) -> tuple[Path, bool]:
+    """Return the safe announcement path and whether weather is unavailable."""
+    current_audio = state_path(config, "current.wav")
+    observation_file = state_path(config, "current-weather.json")
+    unavailable_audio = Path(config["paths"]["media_directory"]) / UNAVAILABLE_AUDIO_NAME
+    max_age_hours = float(config["weather"].get("max_age_hours", 12))
+    if max_age_hours <= 0:
+        raise ValueError("weather.max_age_hours must be greater than zero")
+
+    current_time = now or datetime.now(timezone.utc)
+    if current_time.tzinfo is None:
+        current_time = current_time.replace(tzinfo=timezone.utc)
+
+    try:
+        data = json.loads(observation_file.read_text(encoding="utf-8"))
+        observed_at = datetime.fromisoformat(str(data["observed_at"]))
+        if observed_at.tzinfo is None:
+            observed_at = observed_at.replace(tzinfo=timezone.utc)
+        age_hours = (current_time - observed_at.astimezone(timezone.utc)).total_seconds() / 3600
+        stale = age_hours >= max_age_hours
+    except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError) as error:
+        LOGGER.warning("Weather observation metadata is missing or invalid: %s", error)
+        stale = True
+
+    if current_audio.is_file() and not stale:
+        return current_audio, False
+    return unavailable_audio, True
 
 
 class WeatherWorker(threading.Thread):
@@ -39,7 +71,9 @@ class WeatherWorker(threading.Thread):
             try:
                 self.refresh()
             except Exception:
-                LOGGER.exception("Weather refresh failed; keeping last announcement")
+                LOGGER.exception(
+                    "Weather refresh failed; last observation remains subject to the age limit"
+                )
             self.stop_event.wait(interval)
 
 
@@ -53,11 +87,14 @@ class RadioTransmitter:
         if not bool(self.config["transmitter"].get("enabled", False)):
             LOGGER.info("Weather request received; transmission is disabled")
             return
-        audio = state_path(self.config, "current.wav")
+        audio, unavailable = weather_audio_for_transmission(self.config)
         if not audio.is_file():
-            LOGGER.error("Weather request ignored: %s is missing", audio)
+            LOGGER.error("Weather request ignored: required announcement %s is missing", audio)
             return
-        LOGGER.info("Weather request accepted")
+        if unavailable:
+            LOGGER.warning("Weather request accepted with unavailable-weather announcement")
+        else:
+            LOGGER.info("Weather request accepted")
         self.receiver.stop()
         try:
             self.relay.set(False)

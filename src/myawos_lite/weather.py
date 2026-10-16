@@ -29,6 +29,15 @@ def _f_to_c(value: float) -> int:
     return round((float(value) - 32.0) * 5.0 / 9.0)
 
 
+def _timestamp_to_utc(value: Any) -> datetime:
+    if value is None:
+        raise ValueError("WeatherLink response lacks an observation timestamp")
+    try:
+        return datetime.fromtimestamp(float(value), tz=timezone.utc)
+    except (TypeError, ValueError, OverflowError) as error:
+        raise ValueError(f"Invalid WeatherLink observation timestamp: {value!r}") from error
+
+
 def fetch_weatherlink_live(settings: dict[str, Any]) -> WeatherObservation:
     host = str(settings.get("host", "")).strip()
     if not host:
@@ -44,7 +53,9 @@ def fetch_weatherlink_live(settings: dict[str, Any]) -> WeatherObservation:
     if not outdoor or not barometer:
         raise ValueError("WeatherLink response lacks outdoor or barometer data")
     return WeatherObservation(
-        observed_at=datetime.now(timezone.utc),
+        # The station timestamp is authoritative. Using the computer's current
+        # time here can make a cached or stalled station response look fresh.
+        observed_at=_timestamp_to_utc(payload.get("data", {}).get("ts")),
         wind_direction_deg=_round_direction(outdoor["wind_dir_scalar_avg_last_1_min"]),
         wind_speed_kt=round(float(outdoor["wind_speed_avg_last_1_min"]) * MPH_TO_KT),
         wind_gust_kt=round(float(outdoor["wind_speed_hi_last_2_min"]) * MPH_TO_KT),

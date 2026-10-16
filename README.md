@@ -31,14 +31,14 @@ See [hardware.md](docs/hardware.md) before purchasing or connecting equipment.
 
 The public installer is intended to be published at:
 
-`https://github.com/dennisjamescox/myawos-lite/releases/latest/download/myawos-lite_0.1.0_all.deb`
+`https://github.com/dennisjamescox/myawos-lite/releases/latest/download/myawos-lite_0.1.1_all.deb`
 
 Visitors can download a public GitHub Release asset without a GitHub account.
 Ubuntu 24.04 must already be installed, and internet access is required while
 `apt` downloads the package dependencies.
 
 ```bash
-sudo apt install ./myawos-lite_0.1.0_all.deb
+sudo apt install ./myawos-lite_0.1.1_all.deb
 sudo myawos-lite setup
 sudo myawos-lite doctor
 ```

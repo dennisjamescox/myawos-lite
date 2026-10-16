@@ -2,7 +2,7 @@
 set -eu
 
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-VERSION=${VERSION:-0.1.0}
+VERSION=${VERSION:-0.1.1}
 ARCH=${ARCH:-all}
 BUILD="$ROOT/build/deb-root"
 OUTPUT="$ROOT/dist/myawos-lite_${VERSION}_${ARCH}.deb"

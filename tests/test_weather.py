@@ -1,5 +1,6 @@
 import json
 import unittest
+from datetime import datetime, timezone
 from unittest.mock import MagicMock, patch
 
 from myawos_lite.weather import fetch_weatherlink_live
@@ -10,6 +11,7 @@ class WeatherTests(unittest.TestCase):
     def test_weatherlink_live_mapping(self, urlopen):
         payload = {
             "data": {
+                "ts": 1760616000,
                 "conditions": [
                     {
                         "data_structure_type": 1,
@@ -38,6 +40,34 @@ class WeatherTests(unittest.TestCase):
         self.assertEqual(observation.temperature_c, 25)
         self.assertEqual(observation.dewpoint_c, 15)
         self.assertEqual(observation.altimeter_inhg, 29.92)
+        self.assertEqual(observation.observed_at, datetime.fromtimestamp(1760616000, tz=timezone.utc))
+
+    @patch("myawos_lite.weather.urllib.request.urlopen")
+    def test_weatherlink_live_requires_station_timestamp(self, urlopen):
+        payload = {
+            "data": {
+                "conditions": [
+                    {
+                        "data_structure_type": 1,
+                        "txid": 1,
+                        "wind_dir_scalar_avg_last_1_min": 174,
+                        "wind_speed_avg_last_1_min": 10,
+                        "wind_speed_hi_last_2_min": 15,
+                        "temp": 77,
+                        "dew_point": 59,
+                    },
+                    {"data_structure_type": 3, "bar_sea_level": 29.92},
+                ]
+            }
+        }
+        response = MagicMock()
+        response.status = 200
+        response.read.return_value = json.dumps(payload).encode()
+        response.__enter__.return_value = response
+        urlopen.return_value = response
+
+        with self.assertRaisesRegex(ValueError, "observation timestamp"):
+            fetch_weatherlink_live({"host": "192.0.2.10", "port": 80, "timeout_seconds": 2})
 
 
 if __name__ == "__main__":

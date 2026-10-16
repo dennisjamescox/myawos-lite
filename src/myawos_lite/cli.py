@@ -171,6 +171,7 @@ host = {_toml_quote(host)}
 port = 80
 timeout_seconds = 5
 refresh_seconds = 60
+max_age_hours = 12
 application_key = {_toml_quote(application_key)}
 api_key = {_toml_quote(api_key)}
 mac = {_toml_quote(mac)}

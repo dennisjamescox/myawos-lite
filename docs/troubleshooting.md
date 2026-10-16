@@ -49,4 +49,6 @@
 - Run `myawos-lite doctor`.
 - Confirm the WeatherLink IP or Ecowitt credentials.
 - Verify the computer can reach the station or Internet.
-- The service retains the last successfully generated announcement after a refresh failure.
+- The service may retain the last successful announcement during a brief failure,
+  but it will never transmit it at or beyond `weather.max_age_hours` (12 hours by
+  default). It transmits only “No weather available at this time” after that limit.
